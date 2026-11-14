@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#210f30" />
+  <meta name="description" content="A playful, interactive pixel-style Valentine letter." />
+  <title>Valentine Letter ♡ Pixel Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="playground">
+    <div class="page-title"><span class="title-pulse">♥</span> Valentine Letter <span class="title-accent">— HTML · CSS · JS</span></div>
+
+    <section class="browser" aria-label="Interactive Valentine letter demo">
+      <div class="browser-toolbar">
+        <div class="traffic-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="address"><span class="address-icon">⌁</span> localhost <span>/</span> love</div>
+        <button class="toolbar-restart" type="button" id="toolbarRestart" aria-label="Restart the animation" title="Restart animation">↻</button>
+      </div>
+      <div class="scene" id="scene">
+        <div id="hearts" class="hearts" aria-hidden="true"></div>
+        <div class="vignette" aria-hidden="true"></div>
+
+        <div class="intro" id="intro">
+          <button id="envelope" class="envelope" aria-label="Open the love letter" title="Click to open the letter" type="button">
+            <svg viewBox="0 0 160 112" role="img" aria-label="Pink envelope with a heart seal">
+              <rect x="9" y="10" width="142" height="92" rx="1" fill="#f7d0d2" stroke="#db8589" stroke-width="5"/>
+              <path d="M12 13 L80 64 L148 13" fill="#f8dddd" stroke="#db8589" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M12 99 L59 56 M148 99 L101 56" fill="none" stroke="#db8589" stroke-width="3.8"/>
+              <path d="M67 60 C67 52 77 50 80 57 C84 50 94 52 94 60 C94 66 83 73 80 76 C77 73 67 66 67 60 Z" fill="#e54667"/>
+            </svg>
+          </button>
+          <div class="letter-label"><span>♥</span> Letter For You <span>♥</span></div>
+          <button class="cupid" id="cupid" type="button" aria-label="Shoot Cupid's arrow to open the letter" title="Release Cupid's arrow">
+            <svg class="bow-svg" viewBox="0 0 150 108" aria-hidden="true">
+              <path d="M30 84 Q74 110 120 84" stroke="#aa7039" stroke-width="6" fill="none" stroke-linecap="round" />
+              <path d="M31 83 Q75 72 119 83" stroke="#e8c19a" stroke-width="3" fill="none" stroke-linecap="round" />
+              <path d="M30 84 L75 80 L120 84" stroke="#835b45" stroke-width="1.5" fill="none" />
+              <path d="M75 81 L75 23" stroke="#d44b66" stroke-width="4" stroke-linecap="square" />
+              <path d="M64 36 L75 21 L86 36 Z" fill="#df5170" />
+              <path d="M75 84 L68 92 M75 84 L82 92" stroke="#d44b66" stroke-width="3" />
+            </svg>
+            <span class="projectile" aria-hidden="true">➶</span>
+          </button>
+          <div class="instruction">Aim &amp; release to shoot Cupid's arrow<span> ♡</span></div>
+          <div class="mobile-hint">Tap the bow or the letter</div>
+        </div>
+
+        <div class="love-window" id="loveWindow" role="dialog" aria-modal="false" aria-label="Love letter" hidden>
+          <div class="window-top">
+            <span>LOVE</span>
+            <div class="window-actions">
+              <button id="minimizeBtn" type="button" aria-label="Minimize letter" title="Minimize">−</button>
+              <button id="maximizeBtn" type="button" aria-label="Resize letter" title="Resize">□</button>
+              <button id="closeBtn" type="button" aria-label="Close letter" title="Close">×</button>
+            </div>
+          </div>
+          <div class="window-decor" aria-hidden="true">♥ <span>·</span> ♥ <span>·</span> ♥</div>
+          <div class="window-body" id="windowBody">
+            <div class="question-state" id="questionState">
+              <h1>Do you love me?</h1>
+              <canvas class="pixel-cat" id="cat" width="34" height="30" role="img" aria-label="Pixel art black cat holding a red heart"></canvas>
+              <button type="button" class="choice choice-yes" id="yesBtn">YES</button>
+              <button type="button" class="choice choice-no" id="noBtn">NO</button>
+            </div>
+            <div class="success-state" id="successState" hidden aria-live="polite">
+              <h1>Yippeeee!</h1>
+              <canvas class="pixel-cat happy-cat" id="happyCat" width="34" height="30" role="img" aria-label="Happy pixel art cat holding a heart"></canvas>
+              <p>You! You just made me the<br/><strong>happiest</strong> person alive <span>♥</span></p>
+              <button type="button" id="againBtn" class="again-btn">Play again ↻</button>
+            </div>
+          </div>
+        </div>
+        <div id="heartBurst" class="heart-burst" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="code-panels" aria-label="Technologies behind this project">
+      <div class="code-panel">
+        <h2>Html</h2>
+        <pre><code><span class="muted">&lt;!-- The love window --&gt;</span>
+<span class="pink">&lt;section</span> <span class="blue">class</span>=<span class="gold">"window"</span><span class="pink">&gt;</span>
+  <span class="pink">&lt;header&gt;</span>LOVE<span class="pink">&lt;/header&gt;</span>
+  <span class="pink">&lt;h1&gt;</span>Do you love me?<span class="pink">&lt;/h1&gt;</span>
+  <span class="pink">&lt;canvas</span> <span class="blue">id</span>=<span class="gold">"cat"</span><span class="pink">&gt;&lt;/canvas&gt;</span>
+  <span class="pink">&lt;button&gt;</span>YES<span class="pink">&lt;/button&gt;</span>
+  <span class="pink">&lt;button&gt;</span>NO<span class="pink">&lt;/button&gt;</span>
+<span class="pink">&lt;/section&gt;</span></code></pre>
+      </div>
+      <div class="code-panel">
+        <h2 class="blue">CSS</h2>
+        <pre><code><span class="muted">/* Pastel + pixel art */</span>
+<span class="pink">.window</span> {
+  <span class="blue">border</span>: <span class="gold">3px solid pink</span>;
+  <span class="blue">box-shadow</span>: <span class="gold">0 12px 24px #aa6</span>;
+}
+<span class="pink">.hearts</span> {
+  <span class="blue">animation</span>: <span class="gold">float 8s infinite</span>;
+}
+<span class="pink">canvas</span> {
+  <span class="blue">image-rendering</span>: <span class="gold">pixelated</span>;
+}</code></pre>
+      </div>
+      <div class="code-panel">
+        <h2 class="gold">JS</h2>
+        <pre><code><span class="muted">// Little interactive magic</span>
+<span class="blue">const</span> <span class="pink">noBtn</span> =
+  document.querySelector(<span class="gold">'#noBtn'</span>);
+
+<span class="pink">noBtn</span>.addEventListener(
+  <span class="gold">'pointerenter'</span>, dodge
+);
+
+<span class="pink">yesBtn</span>.onclick = () =&gt; {
+  celebrate();
+};</code></pre>
+      </div>
+    </section>
+    <div class="footer-note">Made with <span>♥</span> and a little JavaScript magic</div>
+  </main>
+</body>
+</html>
